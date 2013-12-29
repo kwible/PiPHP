@@ -114,9 +114,9 @@ class PiPHP extends AdvancedPiPHP
 		return $this->execute('mkdir ' . $dirName . $this->parseAttr($attributes));
 	}
 
-	public function renameDir($dirName, $newDirName)
+	public function renameDir($dirName, $replacement)
 	{
-		return $this->execute('mv ' . $dirName . ' ' . $newDirName);
+		return $this->execute('mv ' . $dirName . ' ' . $replacement);
 	}
 
 	public function removeDir($dirName, $withContents = false)
