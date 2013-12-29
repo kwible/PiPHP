@@ -104,6 +104,16 @@ class PiPHP extends AdvancedPiPHP
 		return $this->execute('sudo halt');
 	}
 
+	public function kill($pid, $su = true)
+	{
+		($su == true) ? return $this->execute('sudo kill ' . $pid) : $this->execute('kill ' . $pid);
+	}
+
+	public function killall($pid, $su = true)
+	{
+		($su == true) ? return $this->execute('sudo killall ' . $pid) : $this->execute('killall ' . $pid);
+	}
+
 	public function changeDir($dirName)
 	{
 		return $this->execute('cd ' . $directoryName);
