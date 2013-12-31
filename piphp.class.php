@@ -104,20 +104,77 @@ class PiPHP extends AdvancedPiPHP
 		return $this->execute('sudo halt');
 	}
 
+	/**
+	 * Kill a process
+	 *
+	 * @param int $pid The PID you want to kill
+	 * @param bool  $su Run as superuser
+	 *
+	 * @return void
+	 */
+
+	public function kill($pid, $su = true)
+	{
+		($su == true) ? return $this->execute('sudo kill ' . $pid) : $this->execute('kill ' . $pid);
+	}
+
+	/**
+	 * Killall processes assigned to a specified PID
+	 *
+	 * @param int $pid The PID you want to kill
+	 * @param bool $su Run as superuser
+	 */
+
+	public function killall($pid, $su = true)
+	{
+		($su == true) ? return $this->execute('sudo killall ' . $pid) : $this->execute('killall ' . $pid);
+	}
+
+	/**
+	 * Change directory
+	 *
+	 * @param  string $dirName The directory name
+	 * @return  void
+	 */
+
 	public function changeDir($dirName)
 	{
 		return $this->execute('cd ' . $directoryName);
 	}
+
+	/**
+	 * Makes an directory
+	 *
+	 * @param  string $dirName The directory name
+	 * @param  array $attributes All attributes
+	 * @return  void 
+	 */
 
 	public function makeDir($dirName, $attributes = array())
 	{
 		return $this->execute('mkdir ' . $dirName . $this->parseAttr($attributes));
 	}
 
+	/**
+	 * Renames an directory
+	 *
+	 * @param  string $dirName The directory you want to been renamed
+	 * @param  string $replacement The name for the 'replacement' directory
+	 * @return  void
+	 */
+
 	public function renameDir($dirName, $replacement)
 	{
 		return $this->execute('mv ' . $dirName . ' ' . $replacement);
 	}
+
+	/**
+	 * Removes a directory
+	 *
+	 * @param  string $dirName The directory name
+	 * @param  bool $withContents Remove a directory with all of his contents
+	 * @return  void
+	 */
 
 	public function removeDir($dirName, $withContents = false)
 	{
@@ -134,10 +191,23 @@ class PiPHP extends AdvancedPiPHP
 		}
 	}
 
+	/**
+	 * Checks if a specified directory exists
+	 *
+	 * @param string $dirName The directory name
+	 * @return void
+	 */
+
 	public function dirExists($dirName)
 	{
 		$sshResponse = $this->execute('if [ ! -d ' . $dirName . ' ]; then fi');
 	}
+
+	/**
+	 * Checks if a specified directory has content
+	 *
+	 * 
+	 */
 
 	public function dirHasContent()
 	{
@@ -151,10 +221,22 @@ class PiPHP extends AdvancedPiPHP
 		return true;
 	}
 
+	/**
+	 * List the directory contents
+	 *
+	 * @return mixed
+	 */
+
 	public function getDirContents()
 	{
 		return $this->execute('ls -l');
 	}
+
+	/**
+	 * Gets a PID of a specified process
+	 *
+	 * @param int $process The process name
+	 */
 
 	public function getPID($process)
 	{
@@ -164,6 +246,13 @@ class PiPHP extends AdvancedPiPHP
 	/////////////////////////////////
 	// VIDEO & PHOTO FUNCTIONALITY //
 	/////////////////////////////////
+	
+	/**
+	 * Takes a picture with the Raspberry Pi camers
+	 *
+	 * @param  string $filename The filename
+	 * @return void
+	 */
 
 	public function takePicture($filename)
 	{
