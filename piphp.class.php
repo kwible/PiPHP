@@ -131,6 +131,18 @@ class PiPHP extends AdvancedPiPHP
 	}
 
 	/**
+	 * Creates a file
+	 * 
+	 * @param  string $fileName The filename
+	 * @return void
+	 */
+	
+	public function createFile($fileName)
+	{
+		return $this->execute('touch ' . $fileName);
+	}
+
+	/**
 	 * Change directory
 	 *
 	 * @param  string $dirName The directory name
